@@ -1,0 +1,43 @@
+<div class="p-4 space-y-4">
+  <header class="flex items-center justify-between p-5">
+    <img src="logo.png"/>
+    <h1 class="text-3xl font-bold">Kanban Board</h1>
+    <button class="px-3 py-2 rounded bg-orange-700 text-white hover:bg-blue-700 focus:outline-none focus-visible:ring"
+      aria-label="Create new ticket" (click)="openCreate()">+ New Ticket</button>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-4 gap-4" role="list" aria-label="Kanban columns">
+   <app-kanban-column
+  label="Backlog"
+  [status]="Status.Backlog"
+  [tickets]="backlog | async"
+  [connectedTo]="idsExcept(backlogId)"
+  (dropped)="onDrop($event)"
+></app-kanban-column>
+
+<app-kanban-column
+  label="To Do"
+  [status]="Status.Todo"
+  [tickets]="todo | async"
+  [connectedTo]="idsExcept(todoId)"
+  (dropped)="onDrop($event)"
+></app-kanban-column>
+
+<app-kanban-column
+  label="In Progress"
+  [status]="Status.InProgress"
+  [tickets]="inProgress | async"
+  [connectedTo]="idsExcept(inProgressId)"
+  (dropped)="onDrop($event)"
+></app-kanban-column>
+
+<app-kanban-column
+  label="Done"
+  [status]="Status.Done"
+  [tickets]="done | async"
+  [connectedTo]="idsExcept(doneId)"
+  (dropped)="onDrop($event)"
+></app-kanban-column>
+
+  </main>
+</div>

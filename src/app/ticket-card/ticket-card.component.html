@@ -1,0 +1,7 @@
+<article class="bg-white rounded shadow p-2 cursor-grab focus:outline-none focus-visible:ring"
+    [attr.aria-label]="'Ticket: ' + ticket.title" role="listitem" tabindex="0">
+    <h3 class="font-medium">{{ ticket.title }}</h3>
+    @if (ticket.description) {
+    <p class="text-sm text-gray-600">{{ ticket.description }}</p>
+    }
+</article>

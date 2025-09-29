@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [KanbanBoardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

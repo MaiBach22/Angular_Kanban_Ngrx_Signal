@@ -1,0 +1,21 @@
+<section cdkDropListGroup [attr.aria-label]="label" role="region">
+   <h2 class="font-semibold mb-2">{{ label }}</h2>
+  <div class="bg-gray-50 rounded-lg p-3 min-h-100">
+    <div
+      cdkDropList
+      [id]="status + '-list'"
+      [cdkDropListData]="tickets ?? []"
+      [cdkDropListConnectedTo]="connectedTo"
+      class="space-y-2 min-h-52"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (ticket of (tickets ?? []); track trackById($index, ticket)) {
+        <div cdkDrag [cdkDragData]="ticket">
+          <app-ticket-card [ticket]="ticket"></app-ticket-card>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+
