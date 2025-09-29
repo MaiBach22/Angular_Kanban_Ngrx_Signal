@@ -5,8 +5,7 @@ import { KanbanBoardComponent } from "./kanban-board/kanban-board.component";
   selector: 'app-root',
   standalone: true,
   imports: [KanbanBoardComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'kanban';

@@ -1,12 +1,16 @@
-<div class="p-4 space-y-4">
+<div class="kanban-board min-h-screen p-6">
   <header class="flex items-center justify-between p-5">
-    <img src="logo.png"/>
-    <h1 class="text-3xl font-bold">Kanban Board</h1>
-    <button class="px-3 py-2 rounded bg-orange-700 text-white hover:bg-blue-700 focus:outline-none focus-visible:ring"
+    <a href="/" class="flex items-center" aria-label="Go to homepage">
+      <img src="logo.png"
+           alt="MyApp logo"
+           class="h-20 w-auto" />
+    </a>
+    <h1 class="text-3xl font-bold text-center text-gray-800 border-2 rounded-lg p-4 kanban-title">Kanban Board</h1>
+    <button class="px-5 py-3 rounded-full text-white font-semibold shadow transition kanban-button"
       aria-label="Create new ticket" (click)="openCreate()">+ New Ticket</button>
   </header>
 
-  <main class="grid grid-cols-1 md:grid-cols-4 gap-4" role="list" aria-label="Kanban columns">
+  <main class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-10" role="list" aria-label="Kanban columns">
    <app-kanban-column
   label="Backlog"
   [status]="Status.Backlog"

@@ -1,11 +1,18 @@
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
   preset: 'jest-preset-angular',
-  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/setup-jest.ts'],
+  roots: ['<rootDir>/src/app'],
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': [
+    '^.+\\.(ts|js|html)$': [
       'jest-preset-angular',
-      { tsconfig: '<rootDir>/tsconfig.spec.json' }
-    ],
+      {
+        useESM: false,
+        tsconfig: '<rootDir>/tsconfig.spec.json',
+        stringifyContentPathRegex: '\\.(html|svg)$',
+        isolatedModules: true
+      }
+    ]
   },
+  coveragePathIgnorePatterns: ['<rootDir>/node_modules/*', '<rootDir>/dist-docker/*', '\\.(html|svg|mjs)$']
 };

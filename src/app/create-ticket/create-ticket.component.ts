@@ -7,8 +7,7 @@ import { TicketDialogResult } from '../models/ticket.model';
   selector: 'app-create-ticket',
   standalone: true,
   imports: [CommonModule, FormsModule, DialogModule],
-  templateUrl: './create-ticket.component.html',
-  styleUrl: './create-ticket.component.css'
+  templateUrl: './create-ticket.component.html'
 })
 export class CreateTicketComponent {
   title = signal<string>('');

@@ -9,29 +9,40 @@ import * as TicketSelectors from '../store/ticket.selectors';
 import * as TicketActions from '../store/ticket.action';
 import { CreateTicketComponent } from '../create-ticket/create-ticket.component';
 import confetti from 'canvas-confetti';
+import {Observable} from 'rxjs';
+
 @Component({
   selector: 'app-kanban-board',
   standalone: true,
   imports: [CommonModule, DragDropModule, DialogModule, KanbanColumnComponent],
-  templateUrl: './kanban-board.component.html',
-  styleUrl: './kanban-board.component.css'
+  templateUrl: './kanban-board.component.html'
 })
 export class KanbanBoardComponent {
-  private store = inject(Store);
-  private dialog = inject(Dialog);
   Status = Status;
+  public backlog: Observable<Ticket[]>;
+  public todo: Observable<Ticket[]>;
+  public inProgress: Observable<Ticket[]>;
+  public done: Observable<Ticket[]>;
 
-readonly backlogId = Status.Backlog + '-list';
-readonly todoId = Status.Todo + '-list';
-readonly inProgressId = Status.InProgress + '-list';
-readonly doneId = Status.Done + '-list';
+  readonly backlogId = Status.Backlog + '-list';
+  readonly todoId = Status.Todo + '-list';
+  readonly inProgressId = Status.InProgress + '-list';
+  readonly doneId = Status.Done + '-list';
 
-readonly allIds = [this.backlogId, this.todoId, this.inProgressId, this.doneId];
+  constructor(
+    private store: Store,
+    private dialog: Dialog
+  ) {
+    this.backlog = this.store.select(TicketSelectors.ticketsByStatus(Status.Backlog));
+    this.todo = this.store.select(TicketSelectors.ticketsByStatus(Status.Todo));
+    this.inProgress = this.store.select(TicketSelectors.ticketsByStatus(Status.InProgress));
+    this.done = this.store.select(TicketSelectors.ticketsByStatus(Status.Done));
+  }
 
-  backlog = this.store.select(TicketSelectors.ticketsByStatus(Status.Backlog));
-  todo = this.store.select(TicketSelectors.ticketsByStatus(Status.Todo));
-  inProgress = this.store.select(TicketSelectors.ticketsByStatus(Status.InProgress));
-  done = this.store.select(TicketSelectors.ticketsByStatus(Status.Done));
+  get allIds(): string[] {
+    return [this.backlogId, this.todoId, this.inProgressId, this.doneId];
+  }
+
 
   openCreate() {
     this.dialog.open<TicketDialogResult>(CreateTicketComponent, { ariaLabel: 'Create new ticket', disableClose: true }).closed.subscribe((res: TicketDialogResult | undefined) => {
@@ -45,7 +56,7 @@ readonly allIds = [this.backlogId, this.todoId, this.inProgressId, this.doneId];
   return this.allIds.filter(x => x !== id);
 }
 
-onDrop(dropData: { event: CdkDragDrop<Ticket[]>; status: Status }) {
+  onDrop(dropData: { event: CdkDragDrop<Ticket[]>; status: Status }) {
   const { event, status: targetStatus } = dropData;
   const ticket = event.item.data as Ticket;
 
@@ -67,11 +78,11 @@ onDrop(dropData: { event: CdkDragDrop<Ticket[]>; status: Status }) {
         y = e.touches[0].clientY;
       }
 
-      confetti({
+      void confetti({
         particleCount: 80,
         spread: 60,
-        origin: { x: x / window.innerWidth, y: y / window.innerHeight }
-      });
+        origin: {x: x / window.innerWidth, y: y / window.innerHeight}
+      })
     }
   }
 }

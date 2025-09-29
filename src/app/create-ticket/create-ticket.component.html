@@ -3,41 +3,57 @@
        aria-labelledby="createTicket"
        aria-describedby="description"
        class="p-6 bg-white rounded-lg shadow-xl max-w-md w-full">
-       
-    <h2 id="createTicket" class="text-lg font-semibold">Create Ticket</h2>
-    <p id="description" class="text-sm text-gray-600 mb-3">Fill in the details below.</p>
+
+    <h2 id="createTicket" class="text-xl font-bold text-gray-800 mb-1">Create Ticket</h2>
+    <p id="description" class="text-sm text-gray-600 mb-4">Fill in the details below.</p>
 
     <form (ngSubmit)="submit()" class="space-y-3">
-      <label class="block">
-        <span class="text-sm">Name</span>
-        <input #namedInput
-               class="mt-1 w-full border rounded p-2 focus:ring focus:ring-blue-300"
-               [value]="title()"
-               (input)="title.set(namedInput.value)"
-               required
-               aria-required="true"
-               aria-label="Ticket name">
-      </label>
-
-      <label class="block">
-        <span class="text-sm">Description</span>
-        <textarea #descriptionInput
-                  class="mt-1 w-full border rounded p-2 focus:ring focus:ring-blue-300"
-                  rows="3"
-                  [value]="description()"
-                  (input)="description.set(descriptionInput.value)"
-                  aria-label="Ticket description">
-        </textarea>
-      </label>
-
-      <div class="flex justify-end gap-2 pt-2">
-        <button type="button"
-                class="px-3 py-2 rounded border hover:bg-gray-100"
-                (click)="close()">Cancel</button>
-        <button type="submit"
-                class="px-3 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
-                [disabled]="!title().trim()">OK</button>
+      <div>
+        <label for="ticketName" class="block text-sm font-medium text-gray-700">
+          Name
+        </label>
+        <input
+          #namedInput
+          id="ticketName"
+          type="text"
+          class="mt-1 w-full border-2 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          [value]="title()"
+          (input)="title.set(namedInput.value)"
+          required
+          aria-required="true"
+        />
       </div>
+
+      <div>
+        <label for="ticketDescription" class="block text-sm font-medium text-gray-700">
+          Description
+        </label>
+        <textarea #descriptionInput
+          id="ticketDescription"
+          rows="3"
+          class="mt-1 w-full border-2 rounded-lg p-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          [value]="description()"
+          (input)="description.set(descriptionInput.value)"
+        ></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-3">
+        <button
+          type="button"
+          class="px-4 py-2 rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition"
+          (click)="close()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          [disabled]="!title().trim()"
+        >
+          OK
+        </button>
+      </div>
+
     </form>
   </div>
 </div>
