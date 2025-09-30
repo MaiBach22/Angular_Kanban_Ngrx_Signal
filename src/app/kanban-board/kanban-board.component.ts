@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { KanbanColumnComponent } from "../kanban-column/kanban-column.component";
 import { Store } from '@ngrx/store';
@@ -10,6 +10,13 @@ import * as TicketActions from '../store/ticket.action';
 import { CreateTicketComponent } from '../create-ticket/create-ticket.component';
 import confetti from 'canvas-confetti';
 import {Observable} from 'rxjs';
+
+
+declare global {
+  interface Window {
+    __confetti?: typeof confetti;
+  }
+}
 
 @Component({
   selector: 'app-kanban-board',
@@ -54,7 +61,12 @@ export class KanbanBoardComponent {
 
   idsExcept(id: string) {
   return this.allIds.filter(x => x !== id);
-}
+  }
+
+
+  private getConfetti() {
+    return window.__confetti ?? confetti;
+  }
 
   onDrop(dropData: { event: CdkDragDrop<Ticket[]>; status: Status }) {
   const { event, status: targetStatus } = dropData;
@@ -78,7 +90,7 @@ export class KanbanBoardComponent {
         y = e.touches[0].clientY;
       }
 
-      void confetti({
+      void this.getConfetti()({
         particleCount: 80,
         spread: 60,
         origin: {x: x / window.innerWidth, y: y / window.innerHeight}
