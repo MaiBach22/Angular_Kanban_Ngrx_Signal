@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-board-bg: #f5f5f3;
   --color-border: #2c3e50;
   --color-button-bg: #de4d43;
@@ -8,34 +8,26 @@
 
   --color-backlog:#95b9a2;
   --color-todo: #9ab7c7;
-  --color-inProgress: #8b8bc4;
+  --color-in-progress: #8b8bc4;
   --color-done: #c79ab1;
 
   --color-ticket-bg: #fdf6e3;
   --color-ticket-outline: #2c3e50;
-
 }
-.kanban-board{
-  background-color: var(--color-board-bg);
+
+.kanban-board {
+  @apply min-h-screen p-6 bg-board-bg;
 }
 .kanban-title {
-  border-color: var(--color-border);
+  @apply text-3xl font-bold text-center text-gray-800 border-2 rounded-lg p-4 border-b-border
 }
 .kanban-button {
-  background-color: var(--color-button-bg);
-}
-.kanban-button:hover {
-  background-color: var(--color-button-bg-hover);
+  @apply px-5 py-3 rounded-full text-white font-semibold shadow transition bg-button-bg hover:bg-button-bg-hover
 }
 .kanban-ticket-card {
-  background-color: var(--color-ticket-bg);
-  border-color: var(--color-ticket-outline)
+  @apply relative rounded-lg p-4 border-2 shadow-sm cursor-grab focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 bg-ticket-bg border-b-ticket-outline
 }
 
 .kanban-input {
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-
-.kanban-input:focus {
-  border-color: var(--color-button-bg);
+  @apply mt-1 w-full border-2 rounded-lg p-2 focus:outline-none focus:border-button-bg transition-shadow duration-200
 }

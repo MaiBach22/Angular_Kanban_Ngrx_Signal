@@ -1,10 +1,10 @@
 <section cdkDropListGroup [attr.aria-label]="label" role="region"
   class="flex flex-col rounded-xl border-2 h-full overflow-hidden"
   [ngClass]="{
-    '[background-color:var(--color-backlog)]': status === Status.Backlog,
-    '[background-color:var(--color-todo)]': status === Status.Todo,
-    '[background-color:var(--color-inProgress)]': status === Status.InProgress,
-    '[background-color:var(--color-done)]': status === Status.Done
+    'bg-backlog': status === Status.Backlog,
+    'bg-todo': status === Status.Todo,
+    'bg-in-progress': status === Status.InProgress,
+    'bg-done': status === Status.Done
   }"
 >
    <h2 class="text-lg font-bold text-center py-2 border-b-2">{{ label }}</h2>

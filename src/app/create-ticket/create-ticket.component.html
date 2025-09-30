@@ -16,7 +16,7 @@
           #namedInput
           id="ticketName"
           type="text"
-          class="mt-1 w-full border-2 rounded-lg p-2 focus:outline-none kanban-input"
+          class="kanban-input"
           [value]="title()"
           (input)="title.set(namedInput.value)"
           required
@@ -31,7 +31,7 @@
         <textarea #descriptionInput
           id="ticketDescription"
           rows="3"
-          class="mt-1 w-full border-2 rounded-lg p-2 focus:outline-none kanban-input"
+          class="kanban-input"
           [value]="description()"
           (input)="description.set(descriptionInput.value)"
         ></textarea>
