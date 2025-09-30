@@ -31,3 +31,11 @@
   background-color: var(--color-ticket-bg);
   border-color: var(--color-ticket-outline)
 }
+
+.kanban-input {
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.kanban-input:focus {
+  border-color: var(--color-button-bg);
+}
